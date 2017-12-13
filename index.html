@@ -23,41 +23,26 @@
 var trajectory1 = document.getElementsByClassName("trajectory1")[0];
 var trajectory2 = document.getElementsByClassName("trajectory2")[0];
 
-
 var rotate1 = 0;
-var rotate2 = 90;
+var rotate2 = 0;
 
-
-    // $('.rotate').css("-webkit-animation", "rotate " + (30/this.value) + "s linear infinite");
-
-
-// document.getElementsByClassName("trajectory2")[0].style.WebkitTransform = "rotate(180deg)"; 
-// // Code for IE9
-// document.getElementsByClassName("trajectory2")[0].style.msTransform = "rotate(180deg)"; 
-// // Standard syntax
-// document.getElementsByClassName("trajectory2")[0].style.transform = "rotate(180deg)"; 
-
+function random(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) ) + min;
+}
 
 function speedChanger()  { 
+	var randomSpeed1 = random(5, 8);
+	var randomSpeed2 = randomSpeed1 - 0.1 ;
+	console.log(randomSpeed1);
+	console.log(randomSpeed2);
+	console.log("----");
 	rotate1 += 360;
 	rotate2 += 360;
 
   	trajectory1.style.webkitTransform = 'rotate('+rotate1+'deg)';
   	trajectory2.style.webkitTransform = 'rotate('+rotate2+'deg)';
-  	var x1 = $('.c1').offset();
-	var x2 = $('.c2').offset();
-	var dx = x1.left - x2.left;
-	var dy = x1.top - x2.top;
-	var distance = Math.sqrt(dx * dx + dy * dy);
-
-	if (distance < 200) {
-		console.log(distance);
-		trajectory1.style.transitionDuration = "3s";
-		trajectory2.style.transitionDuration = "5s";
-		// clearInterval(speedChanger);
-	}
-
-	
+	trajectory1.style.transitionDuration = randomSpeed1 + 's';
+	trajectory2.style.transitionDuration = randomSpeed2 + 's';
 }
 
 setInterval(speedChanger, 1000);

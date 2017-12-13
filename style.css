@@ -24,14 +24,7 @@ html, body {
 	height: 500px;
 	border-radius: 50%;
 }
-.trajectory1 {
-	-webkit-transition: all 5s; /* Safari */
-    transition: all 5s;
-}
-.trajectory2 {
-	-webkit-transition: all 3s; /* Safari */
-    transition: all 3s;
-}
+
 .c {
 	position: absolute;
 	width: 50px;
