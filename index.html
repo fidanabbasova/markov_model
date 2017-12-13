@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div class="container">
+	<div class="space">
+		<div class="trajectory trajectory1">
+			<div class="c c1"></div>
+		</div>
+	</div>
+	<div class="space">
+		<div class="trajectory trajectory2">
+			<div class="c c2"></div>
+		</div>
+	</div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+
+var trajectory1 = document.getElementsByClassName("trajectory1")[0];
+var trajectory2 = document.getElementsByClassName("trajectory2")[0];
+
+
+var rotate1 = 0;
+var rotate2 = 90;
+
+
+    // $('.rotate').css("-webkit-animation", "rotate " + (30/this.value) + "s linear infinite");
+
+
+// document.getElementsByClassName("trajectory2")[0].style.WebkitTransform = "rotate(180deg)"; 
+// // Code for IE9
+// document.getElementsByClassName("trajectory2")[0].style.msTransform = "rotate(180deg)"; 
+// // Standard syntax
+// document.getElementsByClassName("trajectory2")[0].style.transform = "rotate(180deg)"; 
+
+
+function speedChanger()  { 
+	rotate1 += 360;
+	rotate2 += 360;
+
+  	trajectory1.style.webkitTransform = 'rotate('+rotate1+'deg)';
+  	trajectory2.style.webkitTransform = 'rotate('+rotate2+'deg)';
+  	var x1 = $('.c1').offset();
+	var x2 = $('.c2').offset();
+	var dx = x1.left - x2.left;
+	var dy = x1.top - x2.top;
+	var distance = Math.sqrt(dx * dx + dy * dy);
+
+	if (distance < 200) {
+		console.log(distance);
+		trajectory1.style.transitionDuration = "3s";
+		trajectory2.style.transitionDuration = "5s";
+		// clearInterval(speedChanger);
+	}
+
+	
+}
+
+setInterval(speedChanger, 1000);
+
+
+</script>
+</body>
+</html>
