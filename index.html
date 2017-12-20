@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title></title>
-	<link rel="stylesheet" type="text/css" href="style.css">
+	<title>Markov chain</title>
+	<link rel="stylesheet" type="text/css" href="css/font-awesome.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
 <div class="container">
@@ -14,17 +15,71 @@
 	<div class="space">
 		<div class="trajectory trajectory2">
 			<div class="c c2"></div>
+		</div> 
+	</div>
+	<div class="space">
+		<div class="trajectory trajectory3">
+			<div class="c c3"></div>
+		</div>
+	</div>
+	<div class="space">
+		<div class="trajectory trajectory4">
+			<div class="c c4"></div>
 		</div>
 	</div>
 </div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<div class="text">
+	<h1></h1>
+	<p>l = 2 &pi; r = 1;   r = <sup>1</sup> &frasl; <sub>2 &pi;</sub></p>
+	<p>V<sub>1</sub> t , V<sub>2</sub> t , V<sub>3</sub> t , V<sub>4</sub> t</p>
+	<p>&rho;<sub>1</sub> t = Q<sub>i</sub> => V<sub>i</sub> t = V<sub>1</sub></p>
+	<p>&rho;<sub>2</sub> t = Q<sub>i</sub> => V<sub>i</sub> t = V<sub>2</sub></p>
+	<p>&rho;<sub>3</sub> t = Q<sub>i</sub> => V<sub>i</sub> t = V<sub>3</sub></p>
+	<p>&rho;<sub>4</sub> t = Q<sub>i</sub> => V<sub>i</sub> t = V<sub>4</sub></p>
+	<p>Q<sub>1</sub> = Q<sub>2</sub> = Q<sub>3</sub> = Q<sub>4</sub> </p>
+	<p>V<sub>1</sub> &#60; V<sub>2</sub> &#60; V<sub>3</sub> &#60; V<sub>4</sub> </p>
+</div>
+<div class="buttons">
+	<button onclick="startInterval()"><i class="fa fa-play" aria-hidden="true"></i> Start</button>
+	<button onclick="stopInterval()"><i class="fa fa-stop" aria-hidden="true"></i> Stop</button>
+	<div class="speeds">
+		<p>Dövretmə periodları:</p>
+		<p>T<sub>1</sub> = <span id="span1">0</span> s</p>
+		<p>T<sub>2</sub> = <span id="span2">0</span> s</p>
+		<p>T<sub>3</sub> = <span id="span3">0</span> s</p>
+		<p>T<sub>4</sub> = <span id="span4">0</span> s</p>
+	</div>
+</div>
+
 <script>
 
+var startInterval = function(){
+	trajectory1.classList.remove("notransition");
+    trajectory2.classList.remove("notransition");
+    trajectory3.classList.remove("notransition");
+    trajectory4.classList.remove("notransition");
+	setInterval(speedChanger, 1000);
+	speeds.style.display = "block";
+}
+
+var stopInterval = function(){
+    trajectory1.classList.add("notransition");
+    trajectory2.classList.add("notransition");
+    trajectory3.classList.add("notransition");
+    trajectory4.classList.add("notransition");
+	clearInterval(speedChanger);
+	speeds.style.display = "none";
+}
+var speeds = document.getElementsByClassName("speeds")[0];
 var trajectory1 = document.getElementsByClassName("trajectory1")[0];
 var trajectory2 = document.getElementsByClassName("trajectory2")[0];
+var trajectory3 = document.getElementsByClassName("trajectory3")[0];
+var trajectory4 = document.getElementsByClassName("trajectory4")[0];
 
 var rotate1 = 0;
 var rotate2 = 0;
+var rotate3 = 0;
+var rotate4 = 0;
 
 function random(min, max) {
     return Math.floor(Math.random() * (max - min + 1) ) + min;
@@ -32,17 +87,38 @@ function random(min, max) {
 
 function speedChanger()  { 
 	var randomSpeed1 = random(5, 8);
-	var randomSpeed2 = randomSpeed1 - 0.1 ;
+	randomSpeed1 = randomSpeed1 - 0.01;
+	var randomSpeed2 = randomSpeed1 - 0.01 ;
+	var randomSpeed3 = randomSpeed1 - 0.02 ;
+	var randomSpeed3 = randomSpeed3.toFixed(2);
+	var randomSpeed4 = randomSpeed1 - 0.03 ;
+
 	console.log(randomSpeed1);
 	console.log(randomSpeed2);
+	console.log(randomSpeed3);
+	console.log(randomSpeed4);
 	console.log("----");
+
+	document.getElementById("span1").innerHTML = randomSpeed1;
+	document.getElementById("span2").innerHTML = randomSpeed2;
+	document.getElementById("span3").innerHTML = randomSpeed3;
+	document.getElementById("span4").innerHTML = randomSpeed4;
+
+
 	rotate1 += 360;
 	rotate2 += 360;
+	rotate3 += 360;
+	rotate4 += 360;
 
   	trajectory1.style.webkitTransform = 'rotate('+rotate1+'deg)';
   	trajectory2.style.webkitTransform = 'rotate('+rotate2+'deg)';
+  	trajectory3.style.webkitTransform = 'rotate('+rotate3+'deg)';
+  	trajectory4.style.webkitTransform = 'rotate('+rotate4+'deg)';
+
 	trajectory1.style.transitionDuration = randomSpeed1 + 's';
 	trajectory2.style.transitionDuration = randomSpeed2 + 's';
+	trajectory3.style.transitionDuration = randomSpeed3 + 's';
+	trajectory4.style.transitionDuration = randomSpeed4 + 's';
 }
 
 setInterval(speedChanger, 1000);
