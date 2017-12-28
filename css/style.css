@@ -7,11 +7,10 @@ html, body {
 
 .form {
 	position: fixed;
-	left: 15px;
-	bottom: 15px;
+	left: 30px;
+	bottom: 30px;
 	z-index: 2;
 	// display: none;
-
 }
 input, button {
 	margin: 2px;
@@ -60,13 +59,26 @@ input[type=button]:hover {
 }
 .c2 {
 	background: red;
+	top: 45px;
+	right: 45px;
+}
+.c3 {
+	background: red;
 	top: 225px;
 	right: -25px;
 }
-.c3 {
+.c4 {
+	background: red;
+	bottom: 45px;
+	right: 45px;
+}
+.c5 {
 	background: blue;
 	bottom: -25px;
 	right: 225px;
 }
+
+
+
 
 
