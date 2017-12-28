@@ -2,6 +2,7 @@
 <html>
 <head>
 	<title>Markov chain</title>
+	 <meta charset="UTF-8">
 	<link rel="stylesheet" type="text/css" href="css/font-awesome.css">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
@@ -22,107 +23,112 @@
 			<div class="c c3"></div>
 		</div>
 	</div>
-	<div class="space">
-		<div class="trajectory trajectory4">
-			<div class="c c4"></div>
-		</div>
-	</div>
 </div>
-<div class="text">
-	<h1></h1>
-	<p>l = 2 &pi; r = 1;   r = <sup>1</sup> &frasl; <sub>2 &pi;</sub></p>
-	<p>V<sub>1</sub> t , V<sub>2</sub> t , V<sub>3</sub> t , V<sub>4</sub> t</p>
-	<p>&rho;<sub>1</sub> t = Q<sub>i</sub> => V<sub>i</sub> t = V<sub>1</sub></p>
-	<p>&rho;<sub>2</sub> t = Q<sub>i</sub> => V<sub>i</sub> t = V<sub>2</sub></p>
-	<p>&rho;<sub>3</sub> t = Q<sub>i</sub> => V<sub>i</sub> t = V<sub>3</sub></p>
-	<p>&rho;<sub>4</sub> t = Q<sub>i</sub> => V<sub>i</sub> t = V<sub>4</sub></p>
-	<p>Q<sub>1</sub> = Q<sub>2</sub> = Q<sub>3</sub> = Q<sub>4</sub> </p>
-	<p>V<sub>1</sub> &#60; V<sub>2</sub> &#60; V<sub>3</sub> &#60; V<sub>4</sub> </p>
-</div>
-<div class="buttons">
-	<button onclick="startInterval()"><i class="fa fa-play" aria-hidden="true"></i> Start</button>
-	<button onclick="stopInterval()"><i class="fa fa-stop" aria-hidden="true"></i> Stop</button>
-	<div class="speeds">
-		<p>Dövretmə periodları:</p>
-		<p>T<sub>1</sub> = <span id="span1">0</span> s</p>
-		<p>T<sub>2</sub> = <span id="span2">0</span> s</p>
-		<p>T<sub>3</sub> = <span id="span3">0</span> s</p>
-		<p>T<sub>4</sub> = <span id="span4">0</span> s</p>
-	</div>
+
+<div class="form">
+	<label for="q1">Q<sub>1</sub></label>
+	<input type="number" name="q1" id="q1" min="0.1" max="0.9" step="0.1" value="0.25">
+	<label for="q1">Q<sub>2</sub></label>
+	<input type="number" name="q2" id="q2" min="0.1" max="0.9" step="0.1" value="0.5">
+	<label for="q1">T<sub>1</sub></label>
+	<input type="number" name="v1" id="v1" min="0" max="9.0" value="3">
+	<label for="q1">T<sub>2</sub></label>
+	<input type="number" name="v2" id="v2" min="0" max="9.0" value="1">
+	<input type="button" value="Submit" onclick="submitFunction()">
 </div>
 
 <script>
 
-var startInterval = function(){
-	trajectory1.classList.remove("notransition");
-    trajectory2.classList.remove("notransition");
-    trajectory3.classList.remove("notransition");
-    trajectory4.classList.remove("notransition");
-	setInterval(speedChanger, 1000);
-	speeds.style.display = "block";
+var T1, T2;
+
+function submitFunction(){
+	var q1 = document.getElementById('q1');
+	var q2 = document.getElementById('q2');
+	var v1 = document.getElementById('v1');
+	var v2 = document.getElementById('v2');
+	T1 = v1.value;
+	T2 = v2.value;
+	setInterval(myFunction, 2000);
 }
 
-var stopInterval = function(){
-    trajectory1.classList.add("notransition");
-    trajectory2.classList.add("notransition");
-    trajectory3.classList.add("notransition");
-    trajectory4.classList.add("notransition");
-	clearInterval(speedChanger);
-	speeds.style.display = "none";
-}
-var speeds = document.getElementsByClassName("speeds")[0];
 var trajectory1 = document.getElementsByClassName("trajectory1")[0];
 var trajectory2 = document.getElementsByClassName("trajectory2")[0];
 var trajectory3 = document.getElementsByClassName("trajectory3")[0];
-var trajectory4 = document.getElementsByClassName("trajectory4")[0];
 
-var rotate1 = 0;
-var rotate2 = 0;
-var rotate3 = 0;
-var rotate4 = 0;
+var c1 = document.getElementsByClassName("c1")[0];
+var c2 = document.getElementsByClassName("c2")[0];
+var c3 = document.getElementsByClassName("c3")[0];
 
-function random(min, max) {
-    return Math.floor(Math.random() * (max - min + 1) ) + min;
+var i = 1;
+
+function myFunction() {
+	rotate1 = i * 90;
+	rotate2 = i * 90;
+	rotate3 = i * 90;
+
+	switch(i%4) {
+    case 1:
+        speed1 = T1;
+		speed2 = T1;
+		speed3 = T2;
+		c1.style.backgroundColor = "red";
+		c2.style.backgroundColor = "red";
+		c3.style.backgroundColor = "blue";
+        break;
+    case 2:
+        speed1 = T2;
+		speed2 = T1;
+		speed3 = T1;
+		c1.style.backgroundColor = "red";
+		c2.style.backgroundColor = "blue";
+		c3.style.backgroundColor = "blue";
+        break;
+     case 3:
+     	speed1 = T2;
+		speed2 = T2;
+		speed3 = T1;
+		c1.style.backgroundColor = "blue";
+		c2.style.backgroundColor = "blue";
+		c3.style.backgroundColor = "red";
+     	break;
+    default:
+        speed1 = T2;
+		speed2 = T1;
+		speed3 = T1;
+		c1.style.backgroundColor = "blue";
+		c2.style.backgroundColor = "red";
+		c3.style.backgroundColor = "red";
+	}
+
+	console.log("c1="+speed1);
+	console.log("c2="+speed2);
+	console.log("c3="+speed3);
+	console.log("----------");
+
+	trajectory1.style.WebkitTransform = 'rotate('+rotate1+'deg)';
+	trajectory1.style.transform = 'rotate('+rotate1+'deg)';
+
+	trajectory2.style.WebkitTransform = 'rotate('+rotate2+'deg)';
+	trajectory2.style.transform = 'rotate('+rotate2+'deg)';
+
+	trajectory3.style.WebkitTransform = 'rotate('+rotate3+'deg)';
+	trajectory3.style.transform = 'rotate('+rotate3+'deg)';
+
+	trajectory1.style.WebkitTransitionDuration = speed1 + 's';
+	trajectory1.style.transitionDuration = speed1 + 's';
+
+	trajectory2.style.WebkitTransitionDuration = speed2 + 's';
+	trajectory2.style.transitionDuration = speed2 + 's';
+
+	trajectory3.style.WebkitTransitionDuration = speed3 + 's';
+	trajectory3.style.transitionDuration = speed3 + 's';
+
+	i++;
 }
 
-function speedChanger()  { 
-	var randomSpeed1 = random(5, 8);
-	randomSpeed1 = randomSpeed1 - 0.01;
-	var randomSpeed2 = randomSpeed1 - 0.01 ;
-	var randomSpeed3 = randomSpeed1 - 0.02 ;
-	var randomSpeed3 = randomSpeed3.toFixed(2);
-	var randomSpeed4 = randomSpeed1 - 0.03 ;
+function stop() {
 
-	console.log(randomSpeed1);
-	console.log(randomSpeed2);
-	console.log(randomSpeed3);
-	console.log(randomSpeed4);
-	console.log("----");
-
-	document.getElementById("span1").innerHTML = randomSpeed1;
-	document.getElementById("span2").innerHTML = randomSpeed2;
-	document.getElementById("span3").innerHTML = randomSpeed3;
-	document.getElementById("span4").innerHTML = randomSpeed4;
-
-
-	rotate1 += 360;
-	rotate2 += 360;
-	rotate3 += 360;
-	rotate4 += 360;
-
-  	trajectory1.style.webkitTransform = 'rotate('+rotate1+'deg)';
-  	trajectory2.style.webkitTransform = 'rotate('+rotate2+'deg)';
-  	trajectory3.style.webkitTransform = 'rotate('+rotate3+'deg)';
-  	trajectory4.style.webkitTransform = 'rotate('+rotate4+'deg)';
-
-	trajectory1.style.transitionDuration = randomSpeed1 + 's';
-	trajectory2.style.transitionDuration = randomSpeed2 + 's';
-	trajectory3.style.transitionDuration = randomSpeed3 + 's';
-	trajectory4.style.transitionDuration = randomSpeed4 + 's';
 }
-
-setInterval(speedChanger, 1000);
-
 
 </script>
 </body>

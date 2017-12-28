@@ -1,23 +1,29 @@
 html, body {
 	padding: 0;
 	margin: 0;
-	overflow-x: hidden;
+	overflow: hidden;
 	font-family: sans-serif;
 }
-.text {
+
+.form {
 	position: fixed;
+	left: 15px;
+	bottom: 15px;
 	z-index: 2;
-	top: 0;
-	left: 0;
-	width: 25%;
-	height: 100vh;
-	// background: rgb(0, 102, 204);
-	color: #333;
-	margin-top: 150px;
-	margin-left: 50px;
+	// display: none;
+
 }
-.text p {
-	margin: 20px;
+input, button {
+	margin: 2px;
+	padding: 5px 10px;
+	width: 50px;
+	margin-right: 10px;
+}
+input[type=button], button {
+	width: 100px;
+}
+input[type=button]:hover {
+	cursor: pointer;
 }
 .container {
 	margin: 80px auto;
@@ -48,47 +54,19 @@ html, body {
 	border-radius: 50%;
 }
 .c1 {
-	background: orange;
-	top: 48px;
-	left: 48px;
+	background: red;
+	top: -25px;
+	left: 225px;
 }
 .c2 {
-	background: navy;
-	top: 48px;
-	right: 48px;
+	background: red;
+	top: 225px;
+	right: -25px;
 }
 .c3 {
-	background: orange;
-	bottom: 48px;
-	right: 48px;
+	background: blue;
+	bottom: -25px;
+	right: 225px;
 }
-.c4 {
-	background: navy;
-	bottom: 48px;
-	left: 48px;
-}
-.notransition {
-  -webkit-transition: none !important;
-  -moz-transition: none !important;
-  -o-transition: none !important;
-  transition: none !important;
-}
-.buttons {
-	position: fixed;
-	z-index: 2;
-	top: 0;
-	right: 0;
-	width: 25%;
-	height: 100vh;
-	color: #000;
-	margin-top: 180px;
-}
-.buttons button {
-	display: block;
-	padding: 20px;
-	font-size: 1.5em;
-	margin-bottom: 5px;
-}
-.buttons button:hover {
-	cursor: pointer;
-}
+
+
